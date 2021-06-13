@@ -32,7 +32,70 @@ services:
       - 51413:51413/udp
     restart: always
   radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /athenamedia/Appdata/Radarr:/config
+      - /athenamedia/Movies/movies:/movies #optional
+      - /athenamedia/Appdata/Transmission:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: always
   sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /athenamedia/Appdata/Sonarr:/config
+      - /athenamedia/Series/series:/tv #optional
+      - /athenamedia/Appdata/Transmission:/downloads #optional
+    ports:
+      - 8989:8989
+    restart: always
   lidarr:
+    image: ghcr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /athenamedia/Appdata/Lidarr:/config
+      - /athenamedia/Music:/music
+      - /athenamedia/Appdata/Transmission/complete:/downloads
+    ports:
+      - 8686:8686
+    restart: Always
   plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    volumes:
+      - /athenamedia/Appdata/Plex:/config
+      - /athenamedia/Series/serie:/tv
+      - /athenamedia/Movies/movies:/movies
+      - /athenamedia/Music:/music
+      - /athenamedia/Karate:/karate
   ombi:
+    image: ghcr.io/linuxserver/ombi
+    container_name: ombi
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - /athenamedia/Appdata/PlexRequests:/config
+    ports:
+      - 3579:3579
+    restart: always
