@@ -7,7 +7,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
       - AUTO_UPDATE=true #optional
       - RUN_OPTS=<run options here> #optional
     volumes:
@@ -22,6 +22,7 @@ services:
       - PUID=1000
       - PGID=100
       - TRANSMISSION_WEB_HOME=/kettu/
+      - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Transmission:/config
       - /athenamedia/Appdata/Transmission:/downloads
@@ -37,7 +38,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Radarr:/config
       - /athenamedia/Movies/movies:/movies #optional
@@ -51,7 +52,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Sonarr:/config
       - /athenamedia/Series/series:/tv #optional
@@ -65,7 +66,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Lidarr:/config
       - /athenamedia/Music:/music
@@ -93,7 +94,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/PlexRequests:/config
     ports:
@@ -105,7 +106,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/London
+      - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Tautulli:/config
     ports:
