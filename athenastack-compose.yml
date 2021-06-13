@@ -16,6 +16,21 @@ services:
       - 9117:9117
     restart: always
   transmission:
+    image: ghcr.io/linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TRANSMISSION_WEB_HOME=/kettu/
+    volumes:
+      - /athenamedia/Appdata/Transmission:/config
+      - /athenamedia/Appdata/Transmission:/downloads
+      - /athenamedia/Appdata/Transmission/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: always
   radarr:
   sonarr:
   lidarr:
