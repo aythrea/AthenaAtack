@@ -1,64 +1,22 @@
 ---
 version: "2.1"
 services:
-  jackett:
-    image: ghcr.io/linuxserver/jackett
-    container_name: jackett
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-      - AUTO_UPDATE=true #optional
-    volumes:
-      - /athenamedia/Appdata/Jackett:/config
-    ports:
-      - 9117:9117
-    restart: always
-  transmission:
-    image: ghcr.io/linuxserver/transmission
-    container_name: transmission
-    environment:
-      - PUID=1000
-      - PGID=100
-      - TRANSMISSION_WEB_HOME=/kettu/
-      - TZ=America/Chicago
-    volumes:
-      - /athenamedia/Appdata/Transmission:/config
-      - /athenamedia/Appdata/Transmission:/downloads
-      - /athenamedia/Appdata/Transmission/watch:/watch
-    ports:
-      - 9091:9091
-      - 51413:51413
-      - 51413:51413/udp
-    restart: always
-  radarr:
-    image: ghcr.io/linuxserver/radarr
-    container_name: radarr
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /athenamedia/Appdata/Radarr:/config
+      - /athenamedia/Appdata/Bazarr/config:/config
       - /athenamedia/Movies/movies:/movies #optional
-      - /athenamedia/Appdata/Transmission:/downloads #optional
-    ports:
-      - 7878:7878
-    restart: always
-  sonarr:
-    image: ghcr.io/linuxserver/sonarr
-    container_name: sonarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /athenamedia/Appdata/Sonarr:/config
       - /athenamedia/Series/series:/tv #optional
-      - /athenamedia/Appdata/Transmission:/downloads #optional
     ports:
-      - 8989:8989
+      - 6767:6767
     restart: always
+    security_opt:
+      - apparmor=unconfined
   lidarr:
     image: ghcr.io/linuxserver/lidarr
     container_name: lidarr
@@ -72,42 +30,52 @@ services:
       - /athenamedia/Appdata/Transmission/complete:/downloads
     ports:
       - 8686:8686
-    restart: Always
-  plex:
-    image: ghcr.io/linuxserver/plex
-    container_name: plex
-    network_mode: host
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - VERSION=docker
-    volumes:
-      - /athenamedia/Appdata/Plex:/config
-      - /athenamedia/Series/serie:/tv
-      - /athenamedia/Movies/movies:/movies
-      - /athenamedia/Music:/music
-      - /athenamedia/Karate:/karate
-  ombi:
-    image: ghcr.io/linuxserver/ombi
-    container_name: ombi
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Chicago
-    volumes:
-      - /athenamedia/Appdata/PlexRequests:/config
-    ports:
-      - 3579:3579
     restart: always
-  tautulli:
-    image: ghcr.io/linuxserver/tautulli
-    container_name: tautulli
+    security_opt:
+      - apparmor=unconfined
+  radarr:
+    image: ghcr.io/linuxserver/radarr
+    container_name: radarr
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Chicago
     volumes:
-      - /athenamedia/Appdata/Tautulli:/config
+      - /athenamedia/Appdata/Radarr:/config
+      - /athenamedia/Movies/movies:/movies #optional
+      - /athenamedia/Appdata/Transmission:/downloads
     ports:
-      - 8181:8181
-    restart: unless-stopped
+      - 7878:7878
+    restart: always
+    security_opt:
+      - apparmor=unconfined
+  sonarr:
+    image: ghcr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /athenamedia/Appdata/Sonarr:/config
+      - /athenamedia/Series/series:/tv #optional
+      - /athenamedia/Appdata/Transmission:/downloads 
+    ports:
+      - 8989:8989
+    restart: always
+    security_opt:
+      - apparmor=unconfined
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+    volumes:
+      - /athenamedia/Appdata/Prowlarr:/config
+    ports:
+      - 9696:9696
+    restart: always
+    security_opt:
+      - apparmor=unconfined
