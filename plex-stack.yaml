@@ -18,4 +18,4 @@ services:
       - /athenamedia/Music:/music
       - /athenamedia/Karate:/karate
     security_opt:
-      - apparmor=unconfined   
+      - apparmor=unconfined
