@@ -4,16 +4,18 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
+
     network_mode: host
     environment:
       - PUID=1000
       - PGID=1000
       - VERSION=docker
+      - PLEX_CLAIM=claim-DLxDmCNzGxfDaVjcmj_Y
     volumes:
       - /athenamedia/Appdata/Plex:/config
-      - /athenamedia/Series/serie:/tv
+      - /athenamedia/Series/series:/tv
       - /athenamedia/Movies/movies:/movies
       - /athenamedia/Music:/music
       - /athenamedia/Karate:/karate
     security_opt:
-      - apparmor=unconfined
+      - apparmor=unconfined   
