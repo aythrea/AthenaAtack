@@ -2,7 +2,7 @@
 version: "2.1"
 services:
   jackett:
-    image: lscr.io/linuxserver/jackett:latest
+    image: lscr.io/linuxserver/jackett
     container_name: jackett
     network_mode: "host"
     tty: true
