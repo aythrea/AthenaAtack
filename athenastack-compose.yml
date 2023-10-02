@@ -10,8 +10,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Bazarr/config:/config
-      - /athenamedia/Movies/movies:/movies #optional
-      - /athenamedia/Series/series:/tv #optional
+      - /athenamedia/Movies/movies:/movies # optional
+      - /athenamedia/Series/series:/tv # optional
     ports:
       - 6767:6767
     restart: always
@@ -42,7 +42,7 @@ services:
       - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Radarr:/config
-      - /athenamedia/Movies/movies:/movies #optional
+      - /athenamedia/Movies/movies:/movies # optional
       - /athenamedia/Appdata/Transmission:/downloads
     ports:
       - 7878:7878
@@ -58,8 +58,8 @@ services:
       - TZ=America/Chicago
     volumes:
       - /athenamedia/Appdata/Sonarr:/config
-      - /athenamedia/Series/series:/tv #optional
-      - /athenamedia/Appdata/Transmission:/downloads 
+      - /athenamedia/Series/series:/tv # optional
+      - /athenamedia/Appdata/Transmission:/downloads
     ports:
       - 8989:8989
     restart: always
