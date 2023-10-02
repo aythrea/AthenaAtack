@@ -1,0 +1,43 @@
+---
+version: "2.4"
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /athenamedia/Appdata/gluetun:/gluetun
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - OPENVPN_USER={secrets.USER}
+      - OPENVPN_PASSWORD={secrets.PASSWORD}
+      - SERVER_REGIONS=US New York
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    security_opt:
+      - apparmor=unconfined
+    restart: always
+    
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    network_mode: service:gluetun
+    tty: true
+    stdin_open: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - TRANSMISSION_WEB_HOME=/config/webui/flood/
+    volumes:
+      - /athenamedia/Appdata/Transmission:/config
+      - /athenamedia/Appdata/Transmission:/downloads
+      - /athenamedia/Appdata/Transmission/watch:/watch
+    security_opt:
+      - apparmor=unconfined
+    depends_on:
+      - gluetun
+    restart: always
