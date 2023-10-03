@@ -5,22 +5,12 @@ APPLY_FIXES: all
 # ENABLE: # If you use ENABLE variable, all other languages/formats/tooling formats will be disabled by default
 # ENABLE_LINTERS: # If you use ENABLE_LINTERS variable, all other linters will be disabled by default
 DISABLE:
-  - ACTIONLINT
-  - KICS
-  - CSPELL
-  - LYCHEE
-  - V8R
-  - CLOUDFORMATION
-  # - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
-  - CSS
-  - EDITORCONFIG
-  # - SPELL # Uncomment to disable checks of spelling mistakes
-  - JAVASCRIPT
-  - TEKTON
+  - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
+  - SPELL # Uncomment to disable checks of spelling mistakes
+
 DISABLE_LINTERS:
   - JSON_PRETTIER
   - REPOSITORY_GITLEAKS
-  - REPOSITORY_KICS
   - SPELL_PROSELINT
   - SPELL_MISSPELL
   - SPELL_VALE
