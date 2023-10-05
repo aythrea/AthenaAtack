@@ -7,16 +7,19 @@ services:
     cap_add:
       - NET_ADMIN
     volumes:
-      - /athenamedia/Appdata/gluetun:/gluetun
+      - /athenamedia/Appdata/gluetun:/gluetun:latest
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
-      - OPENVPN_USER={secrets.USER}
-      - OPENVPN_PASSWORD={secrets.PASSWORD}
+      - OPENVPN_USER=p3637874
+      - OPENVPN_PASSWORD=L#tMeIn2019
       - SERVER_REGIONS=US New York
     ports:
       - 9091:9091
+      - 9092:9092
       - 51413:51413
       - 51413:51413/udp
+      - 51414:51414
+      - 51414:51414/udp
     security_opt:
       - apparmor=unconfined
     restart: always
@@ -36,6 +39,31 @@ services:
       - /athenamedia/Appdata/Transmission:/config
       - /athenamedia/Appdata/Transmission:/downloads
       - /athenamedia/Appdata/Transmission/watch:/watch
+    security_opt:
+      - apparmor=unconfined
+    depends_on:
+      - gluetun
+    restart: always
+
+  transmission-series:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission-series
+    network_mode: service:gluetun
+    tty: true
+    stdin_open: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Chicago
+      - TRANSMISSION_WEB_HOME=/config/webui/flood/
+     ports:
+      - 9092:9091
+      - 51414:51413
+      - 51414:51413/udp   
+    volumes:
+      - /athenamedia/Appdata/Transmission:/config
+     # - /athenamedia/Appdata/Transmission:/downloads
+     # - /athenamedia/Appdata/Transmission/watch:/watch
     security_opt:
       - apparmor=unconfined
     depends_on:
