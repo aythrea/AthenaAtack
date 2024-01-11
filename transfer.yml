@@ -10,8 +10,8 @@ services:
       - /athenamedia/Appdata/gluetun:/gluetun:latest
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
-      - OPENVPN_USER=p3637874
-      - OPENVPN_PASSWORD=L#tMeIn2019
+      - OPENVPN_USER=
+      - OPENVPN_PASSWORD=
       - SERVER_REGIONS=US New York
     ports:
       - 9091:9091
